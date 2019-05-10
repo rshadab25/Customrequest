@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Mageguru::top_level" module="Mageguru_Customrequest" resource="Magento_Backend::content" sortOrder="9999" title="Mageguru"/>
+		<add action="mageguru_customrequest/request/index" id="Mageguru_Customrequest::mageguru_customrequest_request" module="Mageguru_Customrequest" parent="Mageguru::top_level" resource="Magento_Backend::content" sortOrder="9999" title="Request"/>
+	</menu>
+</config>

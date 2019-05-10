@@ -1,0 +1,62 @@
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseurl = $storeManager->getStore()->getBaseUrl();
+$submiturl = $baseurl.'customrequest/index/save';
+
+
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $om->create('Magento\Customer\Model\Session');
+if($customerSession->isLoggedIn()) {
+    $customer_id = $customerSession->getCustomer()->getId();
+}else{
+	
+	$redirect = $om->get('\Magento\Framework\App\Response\Http');
+		$redirect->setRedirect('*/*/home');
+}
+
+?>
+<form class="sdb-request-form" action="<?php echo $submiturl; ?>" id="sdb-request-form" method="post" enctype='multipart/form-data'>
+    <fieldset class="fieldset">
+        <legend class="legend"><span>Request form</span></legend><br>
+        <div class="field note no-label">Please fullfill </div>
+        <div class="field title">
+            <label class="label" for="title"><span>Title</span></label>
+            <div class="control">
+                <input name="title" id="title" title="Name" value="" class="input-text" type="text">
+				<input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
+            </div>
+        </div>
+        <div class="field author">
+            <label class="label" for="author"><span>Color</span></label>
+            <div class="control">
+                <input name="color" id="color" title="Color" value="" class="input-text" type="text">
+            </div>
+        </div>
+		<div class="field size">
+            <label class="label" for="size"><span>Size</span></label>
+            <div class="control">
+                <input name="size" id="size" title="Size" value="" class="input-text" type="text">
+            </div>
+        </div>
+        <div class="field content">
+            <label class="label" for="content"><span>Content</span></label>
+            <div class="control">
+                <textarea name="content" id="content" title="Content" class="input-text" cols="5" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="field image">
+            <label class="label" for="image"><span>Image</span></label>
+            <div class="control">
+                <input name="image" id="image" title="Image" value="" class="input-file" type="file">
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" title="Submit" class="action submit primary">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</form>

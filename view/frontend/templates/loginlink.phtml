@@ -1,0 +1,12 @@
+<?php
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $om->get('\Magento\Store\Model\StoreManagerInterface');
+$baseurl = $storeManager->getStore()->getBaseUrl();
+$indexurl = $baseurl.'customrequest/index';
+$loginurl = $baseurl.'customer/account/login';
+$customerSession = $om->create('Magento\Customer\Model\Session');
+if($customerSession->isLoggedIn()) { ?>
+    <a href="<?php echo $indexurl; ?>" title="Custom Request">Custom Request</a>
+<?php }else{ ?>
+	<a href="<?php echo $loginurl; ?>" title="Custom Request">Custom Request</a>
+<?php } ?>

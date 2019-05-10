@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Mageguru\Customrequest\Api\RequestRepositoryInterface" type="Mageguru\Customrequest\Model\RequestRepository"/>
+	<preference for="Mageguru\Customrequest\Api\Data\RequestInterface" type="Mageguru\Customrequest\Model\Data\Request"/>
+	<preference for="Mageguru\Customrequest\Api\Data\RequestSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Mageguru\Customrequest\Model\ResourceModel\Request\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">mageguru_customrequest_request</argument>
+			<argument name="resourceModel" xsi:type="string">Mageguru\Customrequest\Model\ResourceModel\Request\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="mageguru_customrequest_request_listing_data_source" xsi:type="string">Mageguru\Customrequest\Model\ResourceModel\Request\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<!--         For request image upload -->
+   <virtualType name="Mageguru\Customrequest\RequestImageUpload" type="Mageguru\Customrequest\Model\Request\ImageUploader">
+        <arguments>
+                <argument name="baseTmpPath" xsi:type="string">request/tmp</argument>
+                <argument name="basePath" xsi:type="string">request</argument>
+                <argument name="allowedExtensions" xsi:type="array">
+                    <item name="jpg" xsi:type="string">jpg</item>
+                    <item name="jpeg" xsi:type="string">jpeg</item>
+                    <item name="gif" xsi:type="string">gif</item>
+                    <item name="png" xsi:type="string">png</item>
+                </argument>
+        </arguments>
+    </virtualType>
+<type name="Mageguru\Customrequest\Controller\Adminhtml\Index\Upload">
+    <arguments>
+            <argument name="imageUploader" xsi:type="object">Mageguru\Customrequest\RequestImageUpload</argument>
+    </arguments>
+</type>
+</config>

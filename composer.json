@@ -1,0 +1,26 @@
+{
+    "name": "mageguru/module-customrequest",
+    "description": "",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        },
+        {
+            "email": "shadab@hireindians.in",
+            "name": "Shadab Reza"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Mageguru\\Customrequest\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
